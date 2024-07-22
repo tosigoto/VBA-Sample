@@ -131,4 +131,26 @@ Sub DateSample()
 End Sub
 
 
+Sub SelectCaseSample()
+'Select-Case　サンプル
+    Dim ce As Range
+    For Each ce In Range(Cells(2, 1), Cells(2, 1).End(xlDown).Address)
+
+        Dim tgt As Range
+        Set tgt = ce.Offset(0, 1)
+        '文字　中央寄せ
+        tgt.HorizontalAlignment = xlCenter
+
+        Select Case ce.Value
+            Case Is < 40
+                tgt.Value = "u-40"
+            Case Is < 60
+                tgt.Value = "u-60"
+            Case Is < 80
+                tgt.Value = "u-80"
+            Case Else
+                tgt.Value = "me-80"
+        End Select
+    Next ce
+End Sub
 
