@@ -154,3 +154,14 @@ Sub SelectCaseSample()
     Next ce
 End Sub
 
+
+Sub DoWhileSample()
+'Do-While　サンプル
+    Range("A1").Activate
+
+    Do While ActiveCell.Value <> ""
+        Debug.Print ActiveCell.Value
+        ActiveCell.Offset(1, 0).Activate
+    Loop
+End Sub
+
