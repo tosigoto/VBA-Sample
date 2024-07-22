@@ -23,9 +23,9 @@ Sub ArraySample()
 '配列　サンプル　ForEach
     Dim ary() As String
     ReDim ary(0 To Worksheets.Count - 1)
-    Dim i As Integer
 
     'シート名　取得
+    Dim i As Integer
     i = 0
     For Each Sh In Worksheets
         ary(i) = Sh.name
@@ -44,12 +44,12 @@ Sub ArraySample2()
 '配列　サンプル　For
     Dim ary() As String
     ReDim ary(0 To Worksheets.Count - 1)
-    Dim i As Integer
 
     'シート名　取得
-    For i = 0 To Worksheets.Count - 1
+    Dim i As Integer
+	For i = 0 To Worksheets.Count - 1
         ary(i) = Worksheets(i + 1).name
-    Next
+    Next i
 
     'シート名　表示
     Debug.Print Join(ary, vbNewLine)
@@ -131,4 +131,152 @@ Sub DateSample()
 End Sub
 
 
+Sub SelectCaseSample()
+'Select-Case　サンプル
+    Dim ce As Range
+    For Each ce In Range(Cells(2, 1), Cells(2, 1).End(xlDown).Address)
 
+        Dim tgt As Range
+        Set tgt = ce.Offset(0, 1)
+        '文字　中央寄せ
+        tgt.HorizontalAlignment = xlCenter
+
+        Select Case ce.Value
+            Case Is < 40
+                tgt.Value = "u-40"
+            Case Is < 60
+                tgt.Value = "u-60"
+            Case Is < 80
+                tgt.Value = "u-80"
+            Case Else
+                tgt.Value = "me-80"
+        End Select
+    Next ce
+End Sub
+
+
+Sub DoWhileSample()
+'Do-While　サンプル
+    Range("A1").Activate
+
+    Do While ActiveCell.Value <> ""
+        Debug.Print ActiveCell.Value
+        ActiveCell.Offset(1, 0).Activate
+    Loop
+End Sub
+
+
+Sub DictionarySample()
+'ディクショナリー　サンプル
+    Dim dic As Object
+    Set dic = CreateObject("Scripting.Dictionary")
+
+    dic.Add "山", "200"
+    dic.Add "川", "400"
+    dic.Add "海", "1000"
+
+    Dim kk As Variant
+    For Each kk In dic
+        Debug.Print kk & ": " & dic(kk)
+    Next kk
+End Sub
+
+
+Sub ErrorGotoSample()
+'Error　サンプル
+    Dim num As Variant
+
+    On Error GoTo myErr
+
+    num = InputBox("分母を入力して下さい。")
+    If num = "" Then
+        GoTo myEnd
+    End If
+
+    ActiveCell.Value = ActiveCell.Offset(0, -1).Value / num
+    GoTo myEnd
+
+myErr:
+    MsgBox "入力値でエラー発生。", vbCritical
+
+myEnd:
+End Sub
+
+
+Sub ClearSample()
+'ClearContents: 値のみ消去 / Clear: 書式なども消去
+    Rows(1).ClearContents
+
+    Rows(2).Clear
+End Sub
+
+
+Sub AppInputSample()
+'Application.InputBox　サンプル
+    Range("a2").Value = _
+        Application.InputBox("なんでも入力")
+
+    'Typeで型指定
+    Range("b2").Value = _
+        Application.InputBox("数値を入力", Type:=1)
+End Sub
+
+
+Sub ResumeSample()
+'Resume　サンプル
+    Dim num As Variant
+
+myResume:
+    On Error GoTo myErr
+
+    num = InputBox("enter a value to divide by")
+
+    If num = "" Then
+        Exit Sub
+    End If
+
+    ActiveCell.Value = ActiveCell.Offset(0, -1).Value / num
+    Exit Sub
+
+myErr:
+    Dim msg As String
+    msg = "エラー発生。" & vbNewLine & vbNewLine & "やり直しますか？"
+
+    Dim answer As Integer
+    answer = MsgBox(msg, vbYesNo + vbCritical)
+
+    If answer = vbYes Then
+        Resume myResume
+    Else
+        Exit Sub
+    End If
+End Sub
+
+
+Sub InsertNewSheetSample()
+'新規シート追加　サンプル
+    Worksheets.Add
+    Range("A1").Value = Now
+End Sub
+
+
+Function FunctionSample(num As Integer) As Boolean
+'Function　サンプル
+    If num Mod 2 = 0 Then
+        FunctionSample = True
+    Else
+        FunctionSample = False
+    End If
+End Function
+
+
+Sub FuncDescriptionSample()
+'ユーザー定義関数にDescriptionを設定　サンプル
+    Application.MacroOptions Macro:="FunctionSample", _
+        Description:="Return True if num is even number"
+
+    'disabled in XP
+    'Application.MacroOptions Macro:="FunctionSample", _
+    '     ArgumentDescriptions:=Array( _
+    '     "number")
+End Sub
