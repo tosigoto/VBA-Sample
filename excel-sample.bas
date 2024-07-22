@@ -202,3 +202,81 @@ myErr:
 myEnd:
 End Sub
 
+
+Sub ClearSample()
+'ClearContents: 値のみ消去 / Clear: 書式なども消去
+    Rows(1).ClearContents
+
+    Rows(2).Clear
+End Sub
+
+
+Sub AppInputSample()
+'Application.InputBox　サンプル
+    Range("a2").Value = _
+        Application.InputBox("なんでも入力")
+
+    'Typeで型指定
+    Range("b2").Value = _
+        Application.InputBox("数値を入力", Type:=1)
+End Sub
+
+
+Sub ResumeSample()
+'Resume　サンプル
+    Dim num As Variant
+
+myResume:
+    On Error GoTo myErr
+
+    num = InputBox("enter a value to divide by")
+
+    If num = "" Then
+        Exit Sub
+    End If
+
+    ActiveCell.Value = ActiveCell.Offset(0, -1).Value / num
+    Exit Sub
+
+myErr:
+    Dim msg As String
+    msg = "エラー発生。" & vbNewLine & vbNewLine & "やり直しますか？"
+
+    Dim answer As Integer
+    answer = MsgBox(msg, vbYesNo + vbCritical)
+
+    If answer = vbYes Then
+        Resume myResume
+    Else
+        Exit Sub
+    End If
+End Sub
+
+
+Sub InsertNewSheetSample()
+'新規シート追加　サンプル
+    Worksheets.Add
+    Range("A1").Value = Now
+End Sub
+
+
+Function FunctionSample(num As Integer) As Boolean
+'Function　サンプル
+    If num Mod 2 = 0 Then
+        FunctionSample = True
+    Else
+        FunctionSample = False
+    End If
+End Function
+
+
+Sub FuncDescriptionSample()
+'ユーザー定義関数にDescriptionを設定　サンプル
+    Application.MacroOptions Macro:="FunctionSample", _
+        Description:="Return True if num is even number"
+
+    'disabled in XP
+    'Application.MacroOptions Macro:="FunctionSample", _
+    '     ArgumentDescriptions:=Array( _
+    '     "number")
+End Sub
