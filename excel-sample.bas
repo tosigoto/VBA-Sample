@@ -181,3 +181,24 @@ Sub DictionarySample()
     Next kk
 End Sub
 
+
+Sub ErrorGotoSample()
+'Error　サンプル
+    Dim num As Variant
+
+    On Error GoTo myErr
+
+    num = InputBox("分母を入力して下さい。")
+    If num = "" Then
+        GoTo myEnd
+    End If
+
+    ActiveCell.Value = ActiveCell.Offset(0, -1).Value / num
+    GoTo myEnd
+
+myErr:
+    MsgBox "入力値でエラー発生。", vbCritical
+
+myEnd:
+End Sub
+
