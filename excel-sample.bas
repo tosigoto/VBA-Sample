@@ -23,9 +23,9 @@ Sub ArraySample()
 '配列　サンプル　ForEach
     Dim ary() As String
     ReDim ary(0 To Worksheets.Count - 1)
-    Dim i As Integer
 
     'シート名　取得
+    Dim i As Integer
     i = 0
     For Each Sh In Worksheets
         ary(i) = Sh.name
@@ -44,12 +44,12 @@ Sub ArraySample2()
 '配列　サンプル　For
     Dim ary() As String
     ReDim ary(0 To Worksheets.Count - 1)
-    Dim i As Integer
 
     'シート名　取得
-    For i = 0 To Worksheets.Count - 1
+    Dim i As Integer
+	For i = 0 To Worksheets.Count - 1
         ary(i) = Worksheets(i + 1).name
-    Next
+    Next i
 
     'シート名　表示
     Debug.Print Join(ary, vbNewLine)
@@ -163,5 +163,21 @@ Sub DoWhileSample()
         Debug.Print ActiveCell.Value
         ActiveCell.Offset(1, 0).Activate
     Loop
+End Sub
+
+
+Sub DictionarySample()
+'ディクショナリー　サンプル
+    Dim dic As Object
+    Set dic = CreateObject("Scripting.Dictionary")
+
+    dic.Add "山", "200"
+    dic.Add "川", "400"
+    dic.Add "海", "1000"
+
+    Dim kk As Variant
+    For Each kk In dic
+        Debug.Print kk & ": " & dic(kk)
+    Next kk
 End Sub
 
