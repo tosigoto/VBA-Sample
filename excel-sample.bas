@@ -280,3 +280,24 @@ Sub FuncDescriptionSample()
     '     ArgumentDescriptions:=Array( _
     '     "number")
 End Sub
+
+
+Sub FilterOnSample()
+'オートフィルター　ON　サンプル
+    With Range("A1")
+        '1列目の条件
+        .AutoFilter Field:=1, _
+            Criteria1:="<>b", Operator:=xlAnd, _
+            Criteria2:="<>c"
+        '2列目の条件
+        .AutoFilter Field:=2, _
+            Criteria1:="<>1"
+    End With
+End Sub
+
+
+Sub FilterOffSample()
+'オートフィルター　OFF　サンプル
+    Range("A1").AutoFilter
+End Sub
+
