@@ -23,3 +23,8 @@
   - CSVファイルと連携
 
 
+## 参考書
+### VBA Automation for Excel 2019 Cookbook
+  - [Packt Link](https://www.packtpub.com/en-jp/product/vba-automation-for-excel-2019-cookbook-9781789610031)
+  - [Amazon Link](https://www.amazon.co.jp/dp/1789610036)
+
