@@ -350,6 +350,53 @@ Sub ColumnDeleteSample( _
 End Sub
 
 
+Sub EmptyColumnDeleteSample(Optional headerRow as Long = 1)
+' 空列削除　サンプル
+
+    Dim ws As Worksheet
+    Set ws = ActiveSheet
+
+    Dim tableRange As Range
+    Set tableRange = ws.Range("A1:E11")  ' 削除対象の範囲
+
+    dim deleteCount as Long
+    deleteCount = 0
+
+    ' 列を右から左にループして削除を行う
+    Dim i As Long
+    For i = tableRange.Columns.Count To 1 Step -1
+        Dim isEmpty As Boolean
+        isEmpty = True
+
+        Dim col As Range
+        Set col = tableRange.Columns(i)
+
+        ' 項目名以外の行をチェック
+        Dim cell As Range
+        For Each cell In col.Cells
+            ' 項目名よりも下の行　かつ　空白でない　なら
+            If cell.row > headerRow And cell.Value <> "" Then
+                ' この列は空列ではない
+                isEmpty = False
+                Exit For
+            End If
+        Next cell
+
+        ' 項目名以外の行がすべて空白なら列を削除
+        If isEmpty Then
+            Debug.Print "Delete column: " _
+                & col.Cells(1, 1).Value & " at " & col.Column
+            ' 列　削除
+            col.Delete
+            ' 削除数　カウント＋１
+            deleteCount = deleteCount + 1
+        End If
+    Next i
+
+    Debug.Print "Deleted " & deleteCount & " Empty Columns"
+End Sub
+
+
 Sub VlookupSample()
 ' Vlookup　サンプル
 
