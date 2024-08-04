@@ -349,3 +349,45 @@ Sub ColumnDeleteSample( _
     Debug.Print "Deleted " & delCount & " columns"
 End Sub
 
+
+Sub VlookupSample()
+' Vlookup　サンプル
+
+    ' 参照範囲
+    Dim refRng As Range
+    Set refRng = Workbooks("reference.xls").Worksheets("Sheet1") _
+        .Range("A1").CurrentRegion
+
+    Debug.Print "refRng.Address: " & refRng.Address
+
+    ' vlookup検索開始セル
+    Dim baseCell As Range
+    Set baseCell = Range("A2")
+
+    Dim cl As Range
+    For Each cl In Range(baseCell, baseCell.End(xlDown))
+        ' vlookup結果を保持
+        Dim vlValue As Variant
+
+        ' エラー発生時に飛ぶ
+        On Error GoTo ErrHandle
+
+        'get vlookup
+        vlValue = WorksheetFunction.VLookup( _
+            cl.Value, refRng, 2, 0)
+
+        ' セルに値を設定
+        GoTo GoSetValue
+
+ErrHandle:  ' エラー発生時
+        vlValue = "※なし"
+
+        ' セルに値を設定
+        GoTo GoSetValue
+
+GoSetValue:  ' セルにvlookup結果を設定
+        cl.Offset(0, 2).Value = vlValue
+    Next cl
+
+End Sub
+
