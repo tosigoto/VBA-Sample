@@ -5,6 +5,10 @@
   - Excelで動作
 
 
+- ## excel-column.bas
+  - Excelの列の操作
+
+
 - ## word-sample.bas
   - Wordと連携
 
