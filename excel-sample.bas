@@ -1,30 +1,30 @@
 Option Explicit
 
 Sub CollectionSample()
-'コレクション　サンプル
+' コレクション　サンプル
     Dim buf As New Collection
 
-    'シート名　取得
+    ' シート名　取得
     For Each Sh In Worksheets
         buf.Add Sh.name
     Next Sh
 
-    'シート名　表示
+    ' シート名　表示
     For Each vv In buf
         Debug.Print vv
     Next vv
 
-    'コレクション　長さ　表示
+    ' コレクション　長さ　表示
     Debug.Print buf.Count
 End Sub
 
 
 Sub ArraySample()
-'配列　サンプル　ForEach
+' 配列　サンプル　ForEach
     Dim ary() As String
     ReDim ary(0 To Worksheets.Count - 1)
 
-    'シート名　取得
+    ' シート名　取得
     Dim i As Integer
     i = 0
     For Each Sh In Worksheets
@@ -32,35 +32,35 @@ Sub ArraySample()
         i = i + 1
     Next Sh
 
-    'シート名　表示
+    ' シート名　表示
     Debug.Print Join(ary, vbNewLine)
     
-    '配列　長さ　表示
+    ' 配列　長さ　表示
     Debug.Print UBound(ary) - LBound(ary) + 1
 End Sub
 
 
 Sub ArraySample2()
-'配列　サンプル　For
+' 配列　サンプル　For
     Dim ary() As String
     ReDim ary(0 To Worksheets.Count - 1)
 
-    'シート名　取得
+    ' シート名　取得
     Dim i As Integer
-	For i = 0 To Worksheets.Count - 1
+    For i = 0 To Worksheets.Count - 1
         ary(i) = Worksheets(i + 1).name
     Next i
 
-    'シート名　表示
+    ' シート名　表示
     Debug.Print Join(ary, vbNewLine)
 
-    '配列　長さ　表示
+    ' 配列　長さ　表示
     Debug.Print UBound(ary) - LBound(ary) + 1
 End Sub
 
 
 Sub CellAllSample()
-'すべてのセルを扱う
+' すべてのセルを扱う
     Cells.Select
 
     With Selection
@@ -70,43 +70,43 @@ End Sub
 
 
 Sub RangeSample()
-'Range　指定　サンプル
-    'A2
+' Range　指定　サンプル
+    ' A2
     Range("A2").Value = 1
 
-    'B2
+    ' B2
     [B2].Value = "abcd"
 
-    'C2
+    ' C2
     Cells(2, 3).Value = Date
 End Sub
 
 
 Sub FormatSample()
-'フォーマット　サンプル
-    '56.79%
+' フォーマット　サンプル
+    ' 56.79%
     Debug.Print Format(0.56789, Format:="Percent")
-    '00.57
+    ' 00.57
     Debug.Print Format(0.56789, Format:="00.00")
-    '日付　時刻
+    ' 日付　時刻
     Debug.Print Format(Date, Format:="yyyy/mm/dd")
     Debug.Print Format(Now, Format:="yyyy/mm/dd hh:mm:ss")
-    '12,134
+    ' 12,134
     Debug.Print Format(12345, Format:="#,###")
 End Sub
 
 
 Sub WorksheetFunctionSample()
-'関数使用　サンプル
+' 関数使用　サンプル
     Dim mySum As Double
     Dim myAvg As Double
     Dim myMax As Double
 
-    '範囲　取得
+    ' 範囲　取得
     Dim myRange As Range
     Set myRange = Range("A1:A5")
 
-    '範囲　計算
+    ' 範囲　計算
     mySum = WorksheetFunction.Sum(myRange)
     myAvg = WorksheetFunction.Average(myRange)
     myMax = WorksheetFunction.Max(myRange)
@@ -119,26 +119,26 @@ End Sub
 
 
 Sub DateSample()
-'日数　計算　サンプル
+' 日数　計算　サンプル
     Dim td As Date
     Dim ud As Date
     
     td = Date
     ud = DateAdd("yyyy", 1, td)
 
-    '365
+    ' 365
     Debug.Print ud - td
 End Sub
 
 
 Sub SelectCaseSample()
-'Select-Case　サンプル
+' Select-Case　サンプル
     Dim ce As Range
     For Each ce In Range(Cells(2, 1), Cells(2, 1).End(xlDown).Address)
 
         Dim tgt As Range
         Set tgt = ce.Offset(0, 1)
-        '文字　中央寄せ
+        ' 文字　中央寄せ
         tgt.HorizontalAlignment = xlCenter
 
         Select Case ce.Value
@@ -156,7 +156,7 @@ End Sub
 
 
 Sub DoWhileSample()
-'Do-While　サンプル
+' Do-While　サンプル
     Range("A1").Activate
 
     Do While ActiveCell.Value <> ""
@@ -167,7 +167,7 @@ End Sub
 
 
 Sub DictionarySample()
-'ディクショナリー　サンプル
+' ディクショナリー　サンプル
     Dim dic As Object
     Set dic = CreateObject("Scripting.Dictionary")
 
@@ -183,7 +183,7 @@ End Sub
 
 
 Sub ErrorGotoSample()
-'Error　サンプル
+' Error　サンプル
     Dim num As Variant
 
     On Error GoTo myErr
@@ -204,7 +204,7 @@ End Sub
 
 
 Sub ClearSample()
-'ClearContents: 値のみ消去 / Clear: 書式なども消去
+' ClearContents: 値のみ消去 / Clear: 書式なども消去
     Rows(1).ClearContents
 
     Rows(2).Clear
@@ -212,18 +212,18 @@ End Sub
 
 
 Sub AppInputSample()
-'Application.InputBox　サンプル
+' Application.InputBox　サンプル
     Range("a2").Value = _
         Application.InputBox("なんでも入力")
 
-    'Typeで型指定
+    ' Typeで型指定
     Range("b2").Value = _
         Application.InputBox("数値を入力", Type:=1)
 End Sub
 
 
 Sub ResumeSample()
-'Resume　サンプル
+' Resume　サンプル
     Dim num As Variant
 
 myResume:
@@ -254,14 +254,14 @@ End Sub
 
 
 Sub InsertNewSheetSample()
-'新規シート追加　サンプル
+' 新規シート追加　サンプル
     Worksheets.Add
     Range("A1").Value = Now
 End Sub
 
 
 Function FunctionSample(num As Integer) As Boolean
-'Function　サンプル
+' Function　サンプル
     If num Mod 2 = 0 Then
         FunctionSample = True
     Else
@@ -271,11 +271,11 @@ End Function
 
 
 Sub FuncDescriptionSample()
-'ユーザー定義関数にDescriptionを設定　サンプル
+' ユーザー定義関数にDescriptionを設定　サンプル
     Application.MacroOptions Macro:="FunctionSample", _
         Description:="Return True if num is even number"
 
-    'disabled in XP
+    ' disabled in XP
     'Application.MacroOptions Macro:="FunctionSample", _
     '     ArgumentDescriptions:=Array( _
     '     "number")
@@ -283,13 +283,13 @@ End Sub
 
 
 Sub FilterOnSample()
-'オートフィルター　ON　サンプル
+' オートフィルター　ON　サンプル
     With Range("A1")
-        '1列目の条件
+        ' 1列目の条件
         .AutoFilter Field:=1, _
             Criteria1:="<>b", Operator:=xlAnd, _
             Criteria2:="<>c"
-        '2列目の条件
+        ' 2列目の条件
         .AutoFilter Field:=2, _
             Criteria1:="<>1"
     End With
@@ -297,7 +297,49 @@ End Sub
 
 
 Sub FilterOffSample()
-'オートフィルター　OFF　サンプル
+' オートフィルター　OFF　サンプル
     Range("A1").AutoFilter
+End Sub
+
+
+Sub VlookupSample()
+' Vlookup　サンプル
+
+    ' 参照範囲
+    Dim refRng As Range
+    Set refRng = Workbooks("reference.xls").Worksheets("Sheet1") _
+        .Range("A1").CurrentRegion
+
+    Debug.Print "refRng.Address: " & refRng.Address
+
+    ' vlookup検索開始セル
+    Dim baseCell As Range
+    Set baseCell = Range("A2")
+
+    Dim cl As Range
+    For Each cl In Range(baseCell, baseCell.End(xlDown))
+        ' vlookup結果を保持
+        Dim vlValue As Variant
+
+        ' エラー発生時に飛ぶ
+        On Error GoTo ErrHandle
+
+        'get vlookup
+        vlValue = WorksheetFunction.VLookup( _
+            cl.Value, refRng, 2, 0)
+
+        ' セルに値を設定
+        GoTo GoSetValue
+
+ErrHandle:  ' エラー発生時
+        vlValue = "※なし"
+
+        ' セルに値を設定
+        GoTo GoSetValue
+
+GoSetValue:  ' セルにvlookup結果を設定
+        cl.Offset(0, 2).Value = vlValue
+    Next cl
+
 End Sub
 
