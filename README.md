@@ -9,6 +9,15 @@
   - Excelの列の操作
 
 
+- ## excel-row.bas
+  - Excelの行の操作
+    - ファイル分割保存
+
+
+- ## excel-to-dict.bas
+  - Excelの表をDictionaryに変換
+
+
 - ## word-sample.bas
   - Wordと連携
 
